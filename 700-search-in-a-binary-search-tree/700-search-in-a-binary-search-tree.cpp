@@ -9,9 +9,16 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
+
+/*
+
+    Recursive Approach
+
+*/
 class Solution {
 public:
     TreeNode* searchBST(TreeNode* root, int val) {
+        
         
         if(root == NULL)
         {
