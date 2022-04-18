@@ -39,7 +39,7 @@ public:
     
         
         vector<int> ans = inOrder(root);
-        sort(ans.begin() , ans.end());
+      
         
         return ans[k -1];
     }
