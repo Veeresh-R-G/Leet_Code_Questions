@@ -35,6 +35,7 @@ public:
     void recoverTree(TreeNode* root) {
         
         vector<int> ans = inOrder(root);
+        //nlog(n)
         sort(ans.begin() , ans.end());
         int i = 0;
         
