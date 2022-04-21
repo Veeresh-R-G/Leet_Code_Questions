@@ -1,11 +1,5 @@
 class Solution {
 public:
-    /*
-    
-    Time Complexity : O(n) + O(log(n)) ==> O(n)
-    Space Complexity : O(n) ---> n is the number of columns
-    
-    */
     bool searchMatrix(vector<vector<int>>& matrix, int target) {
         
         int cols = matrix[0].size(); //1
