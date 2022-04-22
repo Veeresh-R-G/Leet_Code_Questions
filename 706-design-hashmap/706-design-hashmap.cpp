@@ -11,8 +11,8 @@ public:
         if(myMap.find(key) == myMap.end()){
             //not there
             //so add in map
-            myMap[key] = value;
-            //myMap.insert(pair<int , int>(key , value));
+            // myMap[key] = value;
+            myMap.insert(pair<int , int>(key , value));
         }
         else{
             myMap[key] = value;
