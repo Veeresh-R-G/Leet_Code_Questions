@@ -18,8 +18,8 @@ class Codec:
         """Encodes a URL to a shortened URL.
         """
         temp = "".join(random.sample(self.l, 6))
-        if(longUrl not in self.d.keys()):
-            self.d[temp] = longUrl
+        
+        self.d[temp] = longUrl
         
         return temp
         
