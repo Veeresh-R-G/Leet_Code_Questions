@@ -7,18 +7,12 @@ public:
         
         for(int i = 0 ; i < n ; i++){
             if(s[i] != '#'){
-                    st.push(s[i]);
-                
-                continue;
-                
+                    st.push(s[i]);                
             }
             else{
                if(!st.empty()){
                    st.pop();
-               } 
-                continue;
-                
-                
+               }                  
             }
         }
         
@@ -36,9 +30,16 @@ public:
         
         string ans1 = reducedString(s);
         string ans2 = reducedString(t);
-        // cout << ans1 << " " << ans2 <<  endl;
         
-        int i = 0 ;
+        /*
+        
+        Time complexity : O(n)
+        Space complexity : O(n)
+        
+        */
+        
+        
+        int i = 0;
             
         if(ans1.length() != ans2.length()){
             return false;
@@ -49,8 +50,7 @@ public:
                 return false;
             }
             i++;
-        }
-        
+        }       
         
         return true;
     }
