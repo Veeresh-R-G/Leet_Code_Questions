@@ -28,6 +28,6 @@ class Solution:
             n = n - 1;
             continue
         
-        # print(ans);
+
         return ans[:len(ans) - 1];
         
