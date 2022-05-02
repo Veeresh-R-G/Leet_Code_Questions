@@ -21,8 +21,7 @@ class Solution:
         
         
         n = len(l) - 1;
-        while(n >=0):
-         
+        while(n >=0):         
             if(l[n] != '' and l[n] != " "):
        
                 ans = ans + l[n] + " ";
