@@ -11,6 +11,7 @@ class Solution:
         '''
         
         s = s.lstrip(" ")
+        
         s = s.rstrip(" ")
         
         l = list((s).split(" "))
