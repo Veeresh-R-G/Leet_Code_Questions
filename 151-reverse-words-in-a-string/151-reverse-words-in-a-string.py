@@ -1,6 +1,14 @@
 class Solution:
     def reverseWords(self, s: str) -> str:
         
+        
+        '''
+        
+            Time Complexity : O(n)
+            Space Complexity : O(n)
+            
+        '''
+        
         s = s.lstrip(" ")
         s = s.rstrip(" ")
         
@@ -8,8 +16,9 @@ class Solution:
         
         
         ans = ""
-       
-        # print(l)
+        
+        
+        
         n = len(l) - 1;
         while(n >=0):
          
@@ -21,15 +30,4 @@ class Solution:
         
         # print(ans);
         return ans[:len(ans) - 1];
-    
-    '''
-    
-    ['the', 'sky', 'is', 'blue']
-blue is sky the 
-['hello', 'world']
-world hello 
-['a', 'good', '', '', 'example']
-example   good a 
-
-    '''
         
