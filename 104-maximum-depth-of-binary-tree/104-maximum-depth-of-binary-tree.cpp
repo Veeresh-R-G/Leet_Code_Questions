@@ -16,6 +16,12 @@ public:
         return a>=b ? a : b;
     }
     
+    /*
+    Time Complexity : O(n)
+    Space Complexity : O(h)
+    
+    h--> Height of tree : log(n) where n is the number of nodes
+    */
     int maxDepth(TreeNode* root) {
         if(root == NULL)
         {
