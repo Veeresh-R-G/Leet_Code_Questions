@@ -7,6 +7,11 @@ public:
             return 0;
         }
         
+        /*
+        
+            time = O(n)
+            Space = O(n)
+        */
         vector<int> temp = nums;
         
         sort(temp.begin() , temp.end());
