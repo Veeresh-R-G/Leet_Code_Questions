@@ -17,16 +17,27 @@ public:
         {
             return head;
         }
+        
+        /*
+        
+            Time : O(n)
+            Space : O(1)
+                
+        */
         ListNode* ans = new ListNode(-1);
-        
-        
+                
         
         ListNode* even = new ListNode(-1);
+        ListNode* e = even;
+        
+        
         ListNode* odd = new ListNode(-1);
         ListNode* o = odd;
-        ListNode* e = even;
+        
         ListNode* temp;
         temp = head;
+        
+        
         while(temp!=NULL)
         {
             odd->next = new ListNode(temp->val);
