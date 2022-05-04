@@ -2,6 +2,14 @@ class Solution {
 public:
     int maxOperations(vector<int>& nums, int k) {
         
+        
+        /*
+                
+                Two - pointer again !!
+                Time : O(n*log(n))
+                Space : O(1)
+            
+        */
         if(nums.size() <= 1)
         {
             return 0;
