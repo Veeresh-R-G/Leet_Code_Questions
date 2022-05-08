@@ -9,11 +9,11 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
-class BSTIterator {
-    vector<int> ans;
-    
-public:
-  vector<int> inOrder(TreeNode * root){
+
+/*
+
+Approach 1:
+vector<int> inOrder(TreeNode * root){
         if(root == NULL){
             return {};
         }
@@ -57,6 +57,46 @@ public:
             return true;
         }
         return false;
+    }
+
+*/
+
+//Now optimised approach
+class BSTIterator {
+    stack<TreeNode*> st;
+public:
+    
+    BSTIterator(TreeNode* root) {
+        
+        TreeNode* curr = root;
+        
+        while(curr != NULL)
+        {
+            st.push(curr);
+            curr = curr->left;
+        }
+    }
+    
+    int next() {
+        
+        TreeNode* top = st.top();
+        st.pop();
+        
+        if(top->right)
+        {
+            TreeNode * temp = (top->right);
+            while(temp != NULL)
+            {
+                st.push(temp);
+                temp = temp->left;
+            }
+        }
+        
+        return top->val;
+    }
+    
+    bool hasNext() {
+        return st.empty() == true ? false: true; 
     }
 };
 
