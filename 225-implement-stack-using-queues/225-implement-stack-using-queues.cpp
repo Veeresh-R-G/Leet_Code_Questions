@@ -1,46 +1,59 @@
 class MyStack {
 public:
- 
-    queue<int> q;
-
-    int peek = -1;   
+    
+    /*
+        First Implementation : 
+        
+        1. Using 2 Queues
+        
+        q1      q2
+        
+        Push in q2
+        transfer all elements of q1 to q2 element by element
+        
+        then swap q1 <--> q2
+        
+        the reason we are using the second queue is two store the incoming element
+        
+        and get it at the front of the queue to mimic the FILO property of the stack
+    */
+    
+    queue<int> q1;
+    queue<int> q2;
     MyStack() {
-       
+        
     }
     
     void push(int x) {
-         peek = x;
-        q.push(x);
+        q2.push(x);
+        
+        while(!q1.empty())
+        {
+            int temp = q1.front();
+            q1.pop();
+            
+            q2.push(temp);
+        }
+        
+        swap(q1 , q2);
     }
-    
     
     int pop() {
         
-       int n = q.size();
-       n-=1; 
-       while(n--){
-          peek = q.front();    
-           q.push(peek);
-           q.pop();
-       } 
+        int temp  = q1.front();
         
-       int ret = q.front();   
-        q.pop();                
+        q1.pop();
         
-        return ret;
-        
+        return temp;
     }
     
     int top() {
-        
-     return peek ;
-        
+        return q1.front();
     }
-    
     
     bool empty() {
         
-        return q.size()==0;
+        return q1.empty() == true ? true : false;
     }
 };
 
