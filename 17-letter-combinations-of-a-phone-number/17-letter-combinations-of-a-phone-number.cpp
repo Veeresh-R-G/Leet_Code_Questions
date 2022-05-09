@@ -1,4 +1,13 @@
-class Solution {
+
+
+//------------------------ 2 APPROACHES WRITTEN -----------------------------
+
+/*
+
+    Approach - 1
+    Recursive
+    
+    class Solution {
     
      
 public:
@@ -29,12 +38,12 @@ public:
     
     vector<string> letterCombinations(string digits) {
         
-        /*
+        
             recursion this is!!
             
             Backtracking problem this is !!!
             
-        */
+        
         
         vector<string> ans = {};
         
@@ -63,4 +72,55 @@ public:
         return ans;
         
     }
+};
+
+
+*/
+
+class Solution {
+    
+public:    
+    
+    vector<string> letterCombinations(string digits){        
+        
+        /*
+        
+        Non - recursive --> Iterative Solution
+        
+        
+        */
+        
+        if(digits.empty())
+        {
+            return {};
+        }     unordered_map<int, string> mymap;
+        mymap[2] = "abc";
+        mymap[3] = "def";
+        mymap[4] = "ghi";
+        mymap[5] = "jkl";
+        mymap[6] = "mno";
+        mymap[7] = "pqrs";
+        mymap[8] = "tuv";
+        mymap[9] = "wxyz";
+        vector<string> result = {""};
+        
+        for(auto dig : digits)
+        {
+            vector<string> temp;
+            for(auto curr: mymap[dig - '0'])
+            {
+                for(auto prev : result)
+                {
+                    temp.push_back(prev + curr);
+                }
+            }
+            
+            result.swap(temp);
+            
+        }
+        
+        return result;
+        
+    }
+    
 };
