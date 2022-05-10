@@ -21,7 +21,11 @@ public:
             return;
         }
         
-        
+        else if(temp.size() > k)
+        {
+            return;
+        }
+            
             for(int i = curr ; i < 10 ; i++)
             {
                 
