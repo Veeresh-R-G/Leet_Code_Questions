@@ -7,9 +7,16 @@ public:
             
             Now Switching to dp : 
             Pattern Observation
+            
+            
         */
         
-        // int ans;
+        /*
+        
+            Time Complexity : O(n)
+            Space : O(1) -----> vector size is defined and is changed
+        
+        */
         
         vector<int> temp = { 1, 1, 1, 1,1};
         
