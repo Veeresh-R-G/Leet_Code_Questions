@@ -12,6 +12,6 @@ May Month Challenge 2022<br>
 1. Two Pointer
 2. Binary Search
 3. May 8th same like : BST Iterator
-4. Damn recursion && backtracking ---> Beauty these two are 💫
+4. Damn recursion && backtracking ---> Beauty these two are 💫 (12 - 05 - 2022 p-2)
 
 Credits : [LeetHub](https://github.com/QasimWani/LeetHub)
