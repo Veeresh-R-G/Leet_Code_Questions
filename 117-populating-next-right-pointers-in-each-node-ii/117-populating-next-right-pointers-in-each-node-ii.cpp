@@ -20,6 +20,12 @@ class Solution {
 public:
     Node* connect(Node* root) {
         
+        /*
+        
+            Ok so Basic BFS and then change the next pointer at every_level !!!
+        
+        */
+        
         if(root == NULL)
         {
             return root;
@@ -59,11 +65,7 @@ public:
             }
             int v_n = v.size();
                 
-            // for(auto it:v)
-            // {
-            //     cout << it->val << " ";
-            // }
-            // cout << endl;
+            
                 for(int i = 0 ; i < v_n - 1 ; i++)
                 {
                     // cout<<v[i]->val << " " <<v[i + 1]->val << endl;
