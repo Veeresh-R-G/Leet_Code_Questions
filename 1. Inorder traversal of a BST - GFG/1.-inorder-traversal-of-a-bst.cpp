@@ -34,7 +34,7 @@ Node *newNode(Node *root, int data) {
 
 // Function to return a list containing the inorder traversal of the BST.
 
-vector<int> v = {};
+vector<int> v;
 void helper(Node* root)
 {
     if(root != NULL)
@@ -48,13 +48,8 @@ void helper(Node* root)
 }
 vector<int> inOrder(Node *root) {
     // code here
-    
-    if(root == NULL)
-    {
-        return v;
-    }
-    
     helper(root);
+    
     
     return v;
     
