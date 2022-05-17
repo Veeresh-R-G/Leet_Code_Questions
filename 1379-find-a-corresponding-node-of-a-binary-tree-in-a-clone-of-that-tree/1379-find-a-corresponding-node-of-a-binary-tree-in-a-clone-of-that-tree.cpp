@@ -12,39 +12,60 @@ class Solution {
 public:
     
     
-    vector<TreeNode*> ans;
+    TreeNode* ans;
+    void preOrder(TreeNode* original, TreeNode* cloned, TreeNode* target)
+    {
+        if(original != NULL)
+        {
+            if(original == target)
+            {
+                ans = cloned;
+                return;
+            }
+            preOrder(original->left , cloned->left , target);
+            preOrder(original->right , cloned->right,target);
+        }
+    }
+    
     
     TreeNode* getTargetCopy(TreeNode* original, TreeNode* cloned, TreeNode* target)     
     {
         
-         stack<TreeNode *> s;
-        TreeNode *curr = cloned;
-        TreeNode* ans = NULL;
-        while (curr != NULL || s.empty() == false)
-        {
         
-            while (curr !=  NULL)
+        preOrder(original , cloned , target);
+        
+        /*
+        
+        ----------------Appraoch - 1 --------------------------------------------
+            
+            stack<TreeNode *> s;
+            TreeNode *curr = cloned;
+            TreeNode* ans = NULL;
+            while (curr != NULL || s.empty() == false)
             {
 
-                s.push(curr);
-                curr = curr->left;
-            }
- 
-       
-            curr = s.top();
-            s.pop();
+                while (curr !=  NULL)
+                {
 
-            if(curr->val == target->val)
-            {
-                // cout << "IM here " << endl;
-                return curr;
+                    s.push(curr);
+                    curr = curr->left;
+                }
+
+
+                curr = s.top();
+                s.pop();
+
+                if(curr->val == target->val)
+                {
+                    // cout << "IM here " << endl;
+                    return curr;
+                }
+
+
+                curr = curr->right;
+
             }
- 
-        
-            curr = curr->right;
- 
-        }
-        
+        */
         return ans;
     }
        
