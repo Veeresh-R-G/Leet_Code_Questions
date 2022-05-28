@@ -22,6 +22,14 @@ class Solution
     vector<int> mergeKArrays(vector<vector<int>> arr, int K)
     {
         //code here
+        
+        
+        /*
+        
+            Time Complexity : O(n**2) (Worst Case)
+            Space Complexity : O(n)
+        
+        */
         vector<int> ans = arr[0];
         
         for(int i = 1 ; i < arr.size(); i++)
