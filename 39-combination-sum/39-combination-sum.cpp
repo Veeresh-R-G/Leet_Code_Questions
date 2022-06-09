@@ -1,7 +1,52 @@
 class Solution {
-    
 public:
-    vector<vector<int>> ans;
+    
+    void solve(vector<int> inp , vector<int>& out , vector<vector<int>>& ans , int ind, int K)
+    {
+        if(ind >= inp.size())
+        {
+            if(K == 0)
+            {
+                ans.push_back(out);
+            }
+            return;
+        }
+        
+        if(K < 0)
+        {
+            return;
+        }
+        
+        if(inp[ind] <= K)
+        {
+            out.push_back(inp[ind]);
+            solve(inp , out , ans , ind , K - inp[ind]);
+            out.pop_back();
+        }
+        
+        solve(inp , out , ans , ind + 1 , K);
+    }
+    
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        
+        
+        
+        vector<vector<int>> ans;
+        vector<int> o;
+        int ind = 0;
+        
+        solve(candidates , o , ans , ind , target);
+        
+        return ans;
+    }
+};
+
+/*
+
+-----------------------------------------Approach - 2----------------------
+I like approach - 1
+
+vector<vector<int>> ans;
     
     
     /*
@@ -29,7 +74,7 @@ public:
         so essentially I am only checking when temp.size() == 1 and not be 
         checking further because I will be hitting the base case everytime!!
         lol took me a while to realise this !!!!
-    */
+    
     void solve(int currIndex ,  vector<int> &temp , int target  , vector<int>& candi ,int currSum)
     {
         
@@ -66,4 +111,5 @@ public:
         
         return ans;
     }
-};
+
+*/
