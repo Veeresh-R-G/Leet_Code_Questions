@@ -6,9 +6,6 @@ using namespace std;
 class Solution
 {
 public:
-
-
-
     void solve(int i , vector<int> inp , vector<int> & out , vector<int>& sum)
     {
         if(i >= inp.size())
