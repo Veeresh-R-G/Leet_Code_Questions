@@ -6,42 +6,37 @@ using namespace std;
 class Solution
 {
 public:
-    void solve(int i , vector<int> inp , vector<int> & out , vector<int>& sum)
+
+    void solve(vector<int> inp , vector<int>&ans , int ind , int sum)
     {
-        if(i >= inp.size())
+        if(ind >= inp.size())
         {
-            int s= 0;
-            for(auto ele : out)
-            {
-                s += ele;
-            }
             
-            sum.push_back(s);
-            
+            ans.push_back(sum);
             return;
         }
         
         
-        out.push_back(inp[i]);
-        solve(i + 1 , inp , out , sum);
+        sum += inp[ind];
+        solve(inp , ans , ind + 1 , sum);
         
-        out.pop_back();
-        solve(i + 1 , inp , out ,sum);
+        sum -= inp[ind];
+        solve(inp , ans , ind + 1 , sum);
+        
     }
-    
+
     vector<int> subsetSums(vector<int> arr, int N)
     {
         // Write Your Code here
-        int ind = 0;
-        vector<int> out;
         
-        vector<int> sum;
+        int sum = 0 , ind = 0;
         
+        vector<int> ans;
         
-        solve(ind , arr , out , sum);
+        solve(arr , ans, ind , sum);
         
-        sort(sum.begin() , sum.end());
-        return sum;
+        sort(ans.begin() , ans.end());
+    return ans;
     }
 };
 
