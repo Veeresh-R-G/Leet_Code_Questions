@@ -1,7 +1,7 @@
 class Solution {
 public:
     
-    void solve(vector<vector<int>>&ans , vector<int> nums , vector<int> out ,map<int , bool> &MAP)
+/*     void solve(vector<vector<int>>&ans , vector<int> nums , vector<int> out ,map<int , bool> &MAP)
     {
         if(out.size() == nums.size())
         {
@@ -24,6 +24,24 @@ public:
             }
         }
     }
+    
+    */
+    
+    void solve2(vector<vector<int>>&ans , vector<int>&nums , int ind)
+    {
+        if(ind >= nums.size())
+        {
+            ans.push_back(nums);
+            return;
+        }
+        
+        for(int i = ind ; i < nums.size() ; i++)
+        {
+            swap(nums[ind] , nums[i]);
+            solve2(ans , nums , ind + 1);
+            swap(nums[ind] , nums[i]);
+        }
+    }
     vector<vector<int>> permute(vector<int>& nums) {
         
         vector<vector<int>> ans;
@@ -35,7 +53,8 @@ public:
             myMap.insert({it , false});
         }
         
-        solve(ans , nums , out , myMap);
+        // solve(ans,nums,out,myMap);
+        solve2(ans , nums , 0);
         
         return ans;
     }
