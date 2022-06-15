@@ -1,46 +1,39 @@
 class Solution {
 public:
-    /*
-    
-        
-        
-    */
-    
-    set<vector<int>> mySet;
     
     
     
-    void solve(vector<int> inp , vector<int>& out , int ind)
+    void solve(int ind, vector<int> nums , vector<int>&out , vector<vector<int>>& ans)
     {
-        if(ind >= inp.size())
+        
+        ans.push_back(out);
+        
+        
+        for(int i = ind ; i < nums.size() ; i++)
         {
-            vector<int> t = out;
-            sort(t.begin() , t.end());
-            mySet.insert(t);
-            return;
+            /*
+                This IF statement is the main STAR AND beautty of this problem
+                This is done to avoid the duplicates and also takes in unique elements
+                so Nicely....OP only this is.
+            */
+            if(i != ind && (nums[i] == nums[i-1]))
+            {
+                continue;
+            }
+            out.push_back(nums[i]);
+            solve(i + 1 , nums , out , ans);
+            out.pop_back();
         }
         
-        out.push_back(inp[ind]);
-        solve(inp , out , ind + 1);
-        
-        out.pop_back();
-        solve(inp , out ,ind + 1);
     }
     
     vector<vector<int>> subsetsWithDup(vector<int>& nums) {
         
-        
+        vector<vector<int>> ans;
         vector<int> out = {};
         
-        solve(nums , out , 0);
-        vector<vector<int>> ans;
-        
-         set<int, greater<int> >::iterator itr;
-         for (auto itr = mySet.begin(); itr != mySet.end(); itr++) 
-         {
-             vector<int> temp = *(itr);
-            ans.push_back(temp);      
-         }
+        sort(nums.begin() , nums.end());
+        solve(0 , nums , out , ans);
         
         return ans;
     }
