@@ -12,4 +12,10 @@ in that column for the first time, so
 4. RIGHT-BOTTOM DIAGONAL
 5. RIGHT-SIDE
 ​
+Also Another error
+​
+In the While Loops
+dont decrement (or) increment like : t1-- / t1++ this might lead to accessing the elements
+of a vector which are out of range !!!!.
+​
 ​
