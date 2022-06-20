@@ -9,6 +9,11 @@ using namespace std;
 // User function template for C++
 
 class Solution{
+    
+    vector<int> rowDiff = {-1 , 1 , 0 , 0};
+    vector<int> colDiff = {0 , 0, -1 , 1};
+    string moves = "UDLR";
+    
     void solve(vector<vector<int>> &m , vector<vector<int>> &vis, int row , int col , int n ,
     string& out , vector<string>& ans)
     {
@@ -19,7 +24,25 @@ class Solution{
             return;
         }
         
-        
+        for(int i = 0 ; i < 4 ; i++)
+        {
+            int nextRow = row + rowDiff[i];
+            int nextCol = col + colDiff[i];
+            
+            
+            
+            if(nextRow >= 0 && nextCol >= 0 && nextRow < n && nextCol < n && m[nextRow][nextCol] && 
+            !vis[nextRow][nextCol])
+            {
+                vis[row][col] = 1;
+                out.push_back(moves[i]);
+                solve(m, vis ,nextRow , nextCol , n , out , ans);
+                vis[row][col] = 0;
+                out.pop_back();
+            }
+            
+        }
+        /*
         //Move down check
         if((row + 1 < n) && m[row + 1][col] == 1 && vis[row + 1][col] == 0 )
         {
@@ -60,7 +83,7 @@ class Solution{
             vis[row][col] = 0;
             out.pop_back();
         }
-        
+        */
         
     }
     public:
