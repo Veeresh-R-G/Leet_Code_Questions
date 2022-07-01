@@ -69,6 +69,49 @@ public:
         return dp[m - 1][n - 1];
         
     }
+    
+    int spaceOptimisation(int m , int n)
+    {
+        vector<int> prev(n , 1);
+        //Base Case
+        prev[0] = 1;
+        
+        for(int row = 0 ; row < m ; row++)
+        {
+            vector<int> curr(n , 0);
+            for(int col = 0 ; col < n ; col++)
+            {
+                
+//                 if(row == 0 && col >= 0)
+//                 {
+//                     curr[col] = prev[col - 1];
+//                 }
+                
+//                 if(col == 0 && row >= 0)
+//                 {
+//                     curr[col] = 1;    
+//                 }
+                
+//                 else
+//                 {
+//                     curr[col] = prev[col] + curr[col - 1];
+//                 }
+                if(row == 0 && col == 0)
+                {
+                      curr[col]   = 1;
+                    continue;
+                }
+                    int up = row > 0 ? prev[col] : 0;
+                    int left = col > 0 ? curr[col - 1] : 0;
+                
+                    curr[col] =  up + left;    
+                              
+            }
+            prev = curr;
+        }
+        
+        return prev[n - 1];
+    }
     int uniquePaths(int m, int n) {
         
         // int ans = recursion_(m -1 , n - 1);
@@ -76,7 +119,7 @@ public:
         // vector<vector<int>> dp(m , vector<int>(n , -1));
         // int ans = memoIzation(m - 1, n - 1,dp);
         
-        int ans = tabulation(m, n);
+        int ans = spaceOptimisation(m, n);
         return ans;
     }
 };
