@@ -1,35 +1,36 @@
 class Solution {
 public:
     
-    int solve(vector<int>& cost , int ind , vector<int>& dp)
+    int solve(vector<int>&cost , int ind , int N , vector<int>& dp)
     {
-        if(ind == cost.size() - 1)
+        if(ind == N - 1)
         {
             return cost[ind];
         }
-        
-        if(ind >= cost.size())
+        if(dp[ind] != -1)
+        {
+            return dp[ind];
+        }
+        if(ind >= N )
         {
             return 0;
         }
         
-        if(dp[ind] != -1)            
-        {
-            return dp[ind];
-        }
-        else
-        {
-            int currCost = cost[ind];
-            
-            return dp[ind] = currCost + min(solve(cost , ind + 1 , dp) , solve(cost , ind + 2 , dp));
-        }
+        int one = cost[ind] + solve(cost , ind + 1 , N, dp);
+        int two = cost[ind] + solve(cost , ind + 2 , N, dp);
+        
+        return dp[ind] = min(one , two);
     }
-    
     int minCostClimbingStairs(vector<int>& cost) {
         
+        
         int n = cost.size();
-        vector<int>dp1(n + 1, -1);
-        vector<int>dp2(n + 1, -1);
-        return min(solve(cost , 0 , dp1) , solve(cost , 1 ,dp2));
+        
+        vector<int> dp(n + 1 , -1);
+        int zero = solve(cost , 0 , n , dp);
+        int one = solve(cost , 1 , n, dp);
+        
+        return min(zero , one);
+        
     }
 };
