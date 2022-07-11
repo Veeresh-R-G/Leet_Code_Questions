@@ -26,10 +26,7 @@ public:
     
     bool canPartition(vector<int>& nums) {
         
-        if(nums.size() == 1)
-        {
-            return false;
-        }
+       
         int N = nums.size();
         int sum = 0;
         for(auto ele : nums) sum += ele;
