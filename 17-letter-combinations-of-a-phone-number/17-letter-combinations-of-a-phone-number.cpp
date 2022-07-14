@@ -80,6 +80,23 @@ public:
 class Solution {
     
 public:    
+    void solve(map<int , string>myMap, string s , int ind , vector<string>& out, string& temp)
+{
+    if(ind >= s.length())
+    {
+        out.push_back(temp);
+        return;
+    }
+    
+    string curr =  myMap[s[ind] - '0'] ;
+    for(int i = 0 ; i < curr.length() ; i++)
+    {
+        temp.push_back(curr[i]);
+        solve(myMap ,s , ind + 1 , out , temp);
+        temp.pop_back();
+    }
+    
+}
     
     vector<string> letterCombinations(string digits){        
         
@@ -89,7 +106,7 @@ public:
         
         
         */
-        
+        /*
         if(digits.empty())
         {
             return {};
@@ -119,8 +136,25 @@ public:
             
         }
         
-        return result;
-        
+        return result;     
+        */
+        if(digits.length() == 0) return {};
+        map<int , string> myMap;
+    myMap.insert(pair<int, string>(1, ""));
+    myMap.insert(pair<int, string>(2, "abc"));
+    myMap.insert(pair<int, string>(3, "def"));
+    myMap.insert(pair<int, string>(4, "ghi"));
+    myMap.insert(pair<int, string>(5, "jkl"));
+    myMap.insert(pair<int, string>(6, "mno"));
+    myMap.insert(pair<int, string>(7, "pqrs"));
+    myMap.insert(pair<int, string>(8, "tuv"));
+    myMap.insert(pair<int, string>(9, "wxyz"));
+    vector<string> out= {};
+    string temp = "";
+    solve(myMap, digits , 0 , out , temp);
+    
+    return out;
     }
+    
     
 };
