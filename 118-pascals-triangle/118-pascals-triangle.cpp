@@ -1,37 +1,33 @@
 class Solution {
 public:
+    
+    int f(int i , int j , vector<vector<int>>& dp)
+    {
+        if(i == j) return 1;
+        
+        if(i == 0 || j == 0) return 1;
+        
+        if(dp[i][j] != -1) return dp[i][j];
+        
+        else return dp[i][j] = f(i - 1 , j - 1 , dp) + f(i - 1 , j , dp);
+            
+    }
+    
     vector<vector<int>> generate(int numRows) {
-        int n = numRows;
         
-        if(n == 1)
+        vector<vector<int>> ans = {};
+        vector<vector<int>> dp(numRows , vector<int>(numRows , -1));
+        for(int i = 0 ;i < numRows ; i++)
         {
-            return {{1}};
-        }
-        if(n == 2)
-        {
-            return {{1} , {1, 1}};
-        }
-        
-        vector<vector<int>> ans = {{1} , {1, 1}};
-
-        //n == 4
-        for(int i = 2 ; i < n ; i++)
-        {
-            vector<int> temp;
-            temp.push_back(1);
-            for(int j = 1 ; j < ans[i- 1].size(); j++)
+            vector<int> curr(i + 1 , 0);
+            for(int j = 0 ; j <= i ; j++)
             {
-                int one = ans[i - 1][j];
-                int two = ans[i - 1][j - 1];
-
-                int sum = one + two;
-
-                temp.push_back(sum);
+                curr[j] = f(i , j , dp);
             }
-            temp.push_back(1);
-
-            ans.push_back(temp);
+            ans.push_back(curr);
         }
+        
+        
         return ans;
         
     }
