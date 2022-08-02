@@ -1,22 +1,3 @@
-**Brute Force**
-* Just check for left prev and right prev
-* Area = a[i] * (right - left  - 1)
-​
-```
-Code :
-​
-int left;
-int right;
-int n = a.size();
-int area = -10;
-for(int i = 0 ; i < n ; i++)
-{
-left = i - 1 ;
-while(left > 0 && a[left] >= a[i])
-{
-left--;
-}
-right = i + 1 ;
 while(right < n - 1 && a[right] >= a[i])
 {
 right++;
@@ -30,6 +11,24 @@ return area;
 * Use stack approach for finding the Next smaller and Prev smaller element ashte!!
 ```
 Code :
-​
-```
-​
+int area = -10;
+stack<int> st;
+int n = a.size();
+vector<int> l_prev(n , -1);
+vector<int> r_prev(n , -1);
+/* For Finding Prev Smaller element */
+for(int i = 0 ; i < n ; i++)
+{
+while(!st.empty() && a[st.top()] >= a[i])
+{
+st.pop();
+}
+if(st.empty()) l_prev[i] = 0;
+else l_prev[i] = st.top() + 1;
+st.push(i);
+}
+/* Emptying the stack...hehe xD */
+while(st.empty() == false)
+{
+st.pop();
+}
