@@ -1,60 +1,39 @@
 class Solution {
 public:
-    int largestRectangleArea(vector<int>& a) {
+    int largestRectangleArea(vector<int>& h) {
+     
         
         
-        
+        stack<int> st;
         int area = -10;
-        
-        stack<int> st;        
-        
-        int n = a.size();
-        vector<int> l_prev(n , -1);
-        vector<int> r_prev(n , -1);
-        
-        /* For Finding Prev Smaller element */
-        for(int i = 0 ; i < n ; i++)
+        int n = h.size();
+        for(int i = 0 ; i <= n ; i++)
         {
-           while(!st.empty() && a[st.top()] >= a[i])
-           {
-               st.pop();
-           }
+            while(!st.empty() &&(i == n ||  h[st.top()] >= h[i]))
+            {
+                int ind = st.top();
+               
+                
+                int height = h[ind];
+                st.pop();
+                int rs = i;
+                
+                //after popping so it will be a different value !!!
+                int ls = st.empty() ? 0 : st.top();
+                
+                int width = st.empty() ? rs : rs - ls - 1; 
+                
+                area = max(area , width * height);
+                
+                
+            }
             
-            if(st.empty()) l_prev[i] = 0;
-            
-            else l_prev[i] = st.top() + 1;
             
             st.push(i);
-        }
-        
-        /* Emptying the stack...hehe xD */
-        while(st.empty() == false)
-        {
-            st.pop();
-        }
-        
-        /* For Finding Next Smaller element */
-        for(int i = n - 1 ; i >= 0 ; i--)
-        {
-           while(!st.empty() && a[st.top()] >= a[i])
-           {
-               st.pop();
-           }
             
-            if(st.empty()) r_prev[i] = n - 1;
-            
-            else r_prev[i] = st.top() - 1;
-            
-            st.push(i);
-        }
-        
-        /*  Final Loop to calculate the max Area    */
-        
-        for(int i = 0 ; i < n ; i++)
-        {
-            area = max(area , a[i] * (r_prev[i] - l_prev[i] + 1));
         }
         
         return area;
+        
     }
 };
