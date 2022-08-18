@@ -2,48 +2,51 @@ class Solution {
 public:
     bool searchMatrix(vector<vector<int>>& matrix, int target) {
         
-        int cols = matrix[0].size(); //1
-        int rows = matrix.size(); // 2
-        int whichRowanta = 0; //0
         
-        /*
-        i = 0 
-        1 < mat[0][0] ==> 1 < 1
+        int row = -1;
+        int rowDim = matrix.size();
+        int colDim = matrix[0].size();
         
-        */
         
-        for(int i = 0; i < rows ; i++)
+        
+        
+        for(int i = 0 ; i < matrix.size() ; i++)
         {
-            if(target <= matrix[i][cols - 1])
+            if(matrix[i][colDim - 1] >= target)
             {
-                whichRowanta = i;
+                row = i;
                 break;
             }
         }
         
-        vector<int> search = matrix[whichRowanta];
-        
-        int s = 0;
-        int e = cols - 1;
-        bool found = false;
-        while(s <=e && !found)
+        if(row == -1)
         {
-            int mid = (s) + ((e - s) / 2);
+            //This Implies that the element is greater than the last elements               also
+            return false;
+        }
+        int start = 0;
+        int end = colDim - 1;
+        
+        //Binary Search Now !
+        while(start <= end)
+        {
+            int mid = (start + end) / 2;
             
-            if(search[mid] == target)
+            if(matrix[row][mid] == target)
             {
-                found = true;                
+                return true;
             }
-            
-            else if(target > search[mid])
+            else if(matrix[row][mid] > target)
             {
-                s = mid + 1;
+                end = mid - 1;
             }
             else
             {
-                e = mid - 1;
+                //matrix[row][mid] > target
+                start = mid + 1;
             }
         }
-        return found;
+        
+        return false;
     }
 };
