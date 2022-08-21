@@ -9,63 +9,71 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
-#include <stack>
-#include <vector>
 class Solution {
 public:
-    vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
-        if(root== NULL)
+   
+    vector<vector<int>> solve(TreeNode* root)
+    {
+        if(!root)
         {
             return {};
         }
-        vector<vector<int>> v;
-        stack<TreeNode*> s1; // l to r
-        stack<TreeNode*> s2; // r to l
-        s1.push(root); // Root is always being read from left to right; thats why 
-        //we store in s1
+        stack<TreeNode*> s1 , s2;
         
-        while(!(s1.empty()) || !s2.empty())
+        s1.push(root);
+        vector<vector<int>> ans;
+        while(!s1.empty() || !s2.empty())
         {
             vector<int> temp;
-            if(!(s1.empty()))
+            if(!s1.empty())
             {
-                while(!(s1.empty()))
+                while(!s1.empty())
                 {
-                    TreeNode* front = s1.top();
-                    temp.push_back(front->val);
+                    TreeNode* top = s1.top();
                     s1.pop();
-                    if(front->left)
+                    
+                    temp.push_back(top->val);
+                    if(top->left)
                     {
-                        s2.push(front->left);
+                        s2.push(top->left);
                     }
-                    if(front->right)
+                    
+                    if(top->right)
                     {
-                        s2.push(front->right);
+                        s2.push(top->right);
                     }
                 }
-                
             }
             else
             {
-                while(!(s2.empty()))
+                while(!s2.empty())
                 {
-                    TreeNode* front = s2.top();
-                    temp.push_back(front->val);
+                    TreeNode* top = s2.top();
                     s2.pop();
                     
-                    if(front->right)
+                    if(top->right)
                     {
-                        s1.push(front->right);
+                        s1.push(top->right);
                     }
-                    if(front->left)
-                    {
-                        s1.push(front->left);
-                    }
-                }
                     
+                    temp.push_back(top->val);
+                    if(top->left)
+                    {
+                        s1.push(top->left);
+                    }
+                    
+                    
+                }
             }
-            v.push_back(temp);
+            
+            ans.push_back(temp);
         }
-        return v;
+        
+        return ans;
+    }
+    
+    vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
+        
+        return solve(root);
     }
 };
