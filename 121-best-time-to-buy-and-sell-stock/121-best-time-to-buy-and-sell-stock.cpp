@@ -10,7 +10,7 @@ public:
         
         for(int i = 0 ; i < n ; i++)
         {
-            if(prices[i] - miniPrice > pro) pro = prices[i] - miniPrice;
+            pro = max(pro,prices[i] - miniPrice);
             
             miniPrice = min(miniPrice , prices[i]);
         }
