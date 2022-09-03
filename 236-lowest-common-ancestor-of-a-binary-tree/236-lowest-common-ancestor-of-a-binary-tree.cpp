@@ -16,24 +16,13 @@ public:
             return root;
         }
         
-        
-        TreeNode* left = lowestCommonAncestor(root->left , p , q);
         TreeNode* right = lowestCommonAncestor(root->right , p , q);
+        TreeNode* left = lowestCommonAncestor(root->left , p , q);
         
-        if(!left)
-        {
-            return right;
-        }
+        if(!right) return left;
         
-        if(!right)
-        {
-            return left;
-        }
+        if(!left) return right;
         
-        else
-        {
-            return root;
-        }
-        
+        else return root;
     }
 };
