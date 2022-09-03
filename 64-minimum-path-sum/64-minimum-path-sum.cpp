@@ -27,8 +27,29 @@ public:
         int M = grid[0].size();
         
         
-        vector<vector<int>> dp(N , vector<int> (M , -1));
-        return solve(grid , N - 1 , M - 1 , dp);
+        vector<vector<int>> dp(N , vector<int> (M , 0));
+        
+        //Base Case
+        dp[0][0] = grid[0][0];
+        
+        for(int row = 0 ; row < N ; row++)
+        {
+            for(int col = 0 ; col < M ; col++)
+            {
+                if(row == 0 && col == 0)
+                {
+                    continue;
+                }
+                int up = row >= 1 ? grid[row][col] + dp[row - 1][col] : 1e7;
+                int left = col >= 1 ? grid[row][col] + dp[row][col - 1] : 1e7;
+        
+                dp[row][col] = min(up , left);
+                
+            }
+        }
+        
+        return dp[N - 1][M - 1];
+        
         
     }
 };
