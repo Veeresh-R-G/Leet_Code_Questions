@@ -1,57 +1,31 @@
 class Solution {
 public:
     
-    int solve(vector<int>&cost , int ind , int N , vector<int>& dp)
+    int f(int ind , vector<int>& cost , vector<int>&dp , int n)
     {
-        
-        //Base Case
-        if(ind == N - 1)
-        {
-            return cost[ind];
-        }
-        
-        if(dp[ind] != -1)
-        {
-            return dp[ind];
-        }
-        if(ind >= N )
+        if(ind >= n) 
         {
             return 0;
         }
         
-        int one = cost[ind] + solve(cost , ind + 1 , N, dp);
-        int two = cost[ind] + solve(cost , ind + 2 , N, dp);
+        if(dp[ind] != -1) return dp[ind];
+        
+        int one = cost[ind] + f(ind + 1, cost , dp , n);
+        int two = cost[ind] + f(ind + 2, cost , dp , n);
         
         return dp[ind] = min(one , two);
     }
+    
     int minCostClimbingStairs(vector<int>& cost) {
         
         
         int n = cost.size();
+        vector<int> dp(n + 1 , -1);
+        int startFrom_Zero = f(0 ,cost , dp , n);
         
-        vector<int> dp(n + 1, 0);
+        vector<int> dp2(n + 1 , -1);
+        int startFrom_One = f(1 ,cost , dp2 , n);
         
-        
-        //Base Case
-        dp[0] = cost[0];
-        dp[1] = cost[1];
-        
-        for(int i = 2; i <n ; i++)
-        {
-            dp[i] = min(cost[i] + dp[i - 1] , cost[i] + dp[i - 2]);
-        }
-        for(auto it : dp)
-        {
-            cout << it << " ";
-        }
-        return min(dp[n -1] , dp[n - 2]);
-        
-        
-        
-//         int zero = solve(cost , 0 , n , dp);
-//         int one = solve(cost , 1 , n, dp);
-        
-//         return min(zero , one);
-        
+        return min(startFrom_Zero , startFrom_One);
     }
 };
