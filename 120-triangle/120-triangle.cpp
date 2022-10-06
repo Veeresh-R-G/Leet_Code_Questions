@@ -1,30 +1,24 @@
 class Solution {
 public:
-    int solve(vector<vector<int>>& grid , int row , int col,vector<vector<int>>& dp)
+    
+    int f(vector<vector<int>>& triangle , int ind , int col , int rows,vector<vector<int>>& dp)
     {
-        //Base Case 
-        if(row == grid.size() - 1)
-        {
-            return grid[row][col];
-        }
-        if(row >= grid.size())
-        {
-            return 0;
-        }
-        if(dp[row][col] != -1)
-        {
-            return dp[row][col];
-        }
-        int down = grid[row][col] + solve(grid , row + 1 , col,dp);
-        int leftDiag =grid[row][col] + solve(grid , row + 1 , col + 1 , dp);
+        if(ind >= rows) return 0;
         
-        return dp[row][col] = min(down , leftDiag);
+        
+        if(dp[ind][col] != -1) return dp[ind][col];
+        int down = triangle[ind][col] + f(triangle , ind + 1 , col , rows , dp);
+        int right = triangle[ind][col] + f(triangle , ind + 1 , col + 1 , rows , dp);
+        
+        return dp[ind][col] = min(down , right);
     }
     int minimumTotal(vector<vector<int>>& triangle) {
         
-        
-        int N = triangle.size();
-        vector<vector<int>> dp(N , vector<int>(N , -1));
-        return solve(triangle , 0 , 0 , dp);
+        int n = triangle.size();
+        /*
+            Changing params --> ind && col
+        */
+        vector<vector<int>> dp(n + 1 , vector<int>(n + 1 , -1));
+        return f(triangle , 0 , 0 ,n , dp);
     }
 };
