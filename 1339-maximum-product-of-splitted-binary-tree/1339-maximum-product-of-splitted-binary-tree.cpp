@@ -9,30 +9,41 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
+
 class Solution {
 public:
-    int totalSum;
-    int M=1e9+7;
     
+    //My solution
+    long long totalSum;
+    long long MOD = 1e9 + 7;
+    
+    
+    long long sum(TreeNode* root)
+    {
+        if(!root) return 0;
+        
+        return root->val + sum(root->left) + sum(root->right);
+    }
+    
+    long long maxPro(TreeNode* root , long long& ans)
+    {
+        if(!root) return 0;
+        
+        int currSum = root->val + maxPro(root->left , ans) + maxPro(root->right , ans);
+        
+        ans = max(ans , (totalSum - currSum) * currSum);
+        
+        return currSum;
+        
+    }
     int maxProduct(TreeNode* root) {
-        totalSum=findSum(root);
-        long long ans=INT_MIN;
-        helper(root,ans);
         
-        return ans%M;
-    }
-    
-    int findSum(TreeNode* node){
-        if(node==NULL) return 0;
-        return node->val+findSum(node->left)+findSum(node->right);
-    }
-    
-    int helper(TreeNode* node,long long &ans){
-        if(node==NULL) return 0;
         
-        int curSubtreeSum=node->val+helper(node->left,ans)+helper(node->right,ans);
-        ans=max(ans,(totalSum-curSubtreeSum)*1ll*curSubtreeSum);
+        totalSum = sum(root);
         
-        return curSubtreeSum;
+        long long ans = -1e8;
+        
+        maxPro(root , ans);
+        return ans % (MOD);
     }
 };
