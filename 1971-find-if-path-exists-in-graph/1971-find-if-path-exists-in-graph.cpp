@@ -1,26 +1,43 @@
 class Solution {
 public:
-    bool validPath(int n, vector<vector<int>>& edges, int source, int destination) {
-        vector<int> adj[n];
-        vector<int> vis(n,0);
-        
-        for(auto edge:edges){
-            adj[edge[0]].push_back(edge[1]);
-            adj[edge[1]].push_back(edge[0]);
+    
+    
+    bool dfs(vector<int> graph[] , int curr , int dest , vector<bool>& vis)
+    {
+        if(curr == dest)
+        {
+            return true;
         }
         
-        return dfs(source,adj,vis,destination);
+        vis[curr] = true;
+        for(auto child : graph[curr])
+        {
+            if(!vis[child])
+            {
+                if(dfs(graph , child , dest , vis))
+                {
+                    return true;
+                }
+            }
+        }
+        
+        return false;
     }
     
-    bool dfs(int v,vector<int> adj[],vector<int> &vis,int dest){
-        if(v==dest) return true;
+    bool validPath(int n, vector<vector<int>>& edges, int source, int destination) {
         
-        vis[v]=1;
         
-        for(int child:adj[v]){
-            if(!vis[child]) if(dfs(child,adj,vis,dest)) return true;
+        vector<int> graph[n];
+        
+        for(auto it : edges)
+        {
+            graph[it[0]].push_back(it[1]);
+            graph[it[1]].push_back(it[0]);
         }
-        return false;
+        
+        //Now adjacency list is ready
+        vector<bool> vis(n , false);
+        return dfs(graph , source , destination , vis);
         
     }
 };
