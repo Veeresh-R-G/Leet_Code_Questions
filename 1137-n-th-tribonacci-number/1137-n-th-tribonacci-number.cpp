@@ -12,19 +12,21 @@ public:
         {
             return 1;
         }
-        vector<int> dp(n + 1 , 0);
+       
         
-        dp[0] = 0;
-        dp[1] = dp[2] = 1;
+        int first = 0, second = 1 , third = 1;
+        int temp;
         
         for(int i = 3 ; i <= n ; i++)
         {
-            int temp = dp[i - 1] + dp[i - 2] + dp[i - 3];
+            temp = first + second + third;
+            first = second;
+            second = third;
+            third = temp;
             
-            dp[i] = temp;
         }
         
         
-        return dp[n];
+        return temp;
     }
 };
