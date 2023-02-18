@@ -12,26 +12,24 @@
 class Solution {
 public:
     
-    TreeNode* f(TreeNode* root)
+    
+    void f(TreeNode* root)
     {
-        if(!root || (!root->left && !root->right))
-        {
-            return root;
-        }
+        if(!root) return;
         
-        TreeNode* left = f(root->left);
-        TreeNode* right = f(root->right);
-        
-        TreeNode* temp = left;
-        root->left = right;
+        TreeNode* temp = root->left;
+        root->left = root->right;
         root->right = temp;
         
-        return root;
-        
+        f(root->left);
+        f(root->right);
     }
     
     TreeNode* invertTree(TreeNode* root) {
         
-        return f(root);
+        
+        f(root);
+        
+        return root;
     }
 };
