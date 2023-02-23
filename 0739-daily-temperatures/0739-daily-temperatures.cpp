@@ -1,15 +1,11 @@
 class Solution {
 public:
-    vector<int> dailyTemperatures(vector<int>& temps) {
+    vector<int> dailyTemperatures(vector<int>& temp) {
         
-        int n = temps.size();
-        
-        /*
-            Stack stores the last index of increased Temp
-        */
-        stack<int> st;
-        
+        int n = temp.size();
         vector<int> ans(n , 0);
+        
+        stack<int> st;
         
         for(int i = 0 ; i < n ; i++)
         {
@@ -19,17 +15,18 @@ public:
             }
             else
             {
-                while(!st.empty() && temps[st.top()] < temps[i])
+                
+                
+                while(!st.empty() && temp[st.top()] < temp[i])
                 {
+                    
                     ans[st.top()] = i - st.top();
                     st.pop();
                 }
-                
+                // cout << i << endl;
                 st.push(i);
             }
         }
-        
         return ans;
-        
     }
 };
