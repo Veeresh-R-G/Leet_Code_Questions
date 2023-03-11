@@ -21,36 +21,33 @@
  */
 class Solution {
 public:
-    
-    TreeNode* f(vector<int> n)
-    {
-        int N = n.size();
-        if(!N) return NULL;
-        int mid = N / 2;
-        
-        
-        vector<int> left(n.begin() , n.begin() + mid);
-        vector<int> right(n.begin() + mid + 1 , n.end());
-        
-        return new TreeNode(n[mid] , f(left) , f(right));
-    }
-    
     TreeNode* sortedListToBST(ListNode* head) {
         
-        if(head == NULL) return NULL;
+        if(!head) return NULL;
+        if(!head->next) return new TreeNode(head->val);
         
+        ListNode* slow = head;
+        ListNode* fast = head;
+        ListNode* prev = NULL;
         
-        vector<int> ans;
-        
-        ListNode* temp = head;
-        
-        while(temp)
+        while(slow && fast && fast->next)
         {
-            ans.push_back(temp->val);
-            temp = temp->next;
+            prev = slow;
+            slow = slow -> next;
+            fast = fast -> next -> next;
         }
         
-        return f(ans);
+        int mid = slow -> val;
+        
+        TreeNode* root = new TreeNode(mid);
+        
+        root -> right = sortedListToBST(slow->next);
+        
+        prev -> next = NULL;
+        
+        root -> left = sortedListToBST(head);
+        
+        return root;
         
     }
 };
