@@ -11,10 +11,10 @@
  */
 class Solution {
 public:
-    bool isCompleteTree(TreeNode* root) {
-        
-        
-        queue<TreeNode*> q;
+    
+    bool bfs(TreeNode* root)
+    {
+          queue<TreeNode*> q;
         
         q.push(root);
         
@@ -39,5 +39,30 @@ public:
         }
         
         return true;
+    }
+    
+    int len(TreeNode* root)
+    {
+        if(!root) return 0;
+        
+        return 1 + len(root->left) + len(root->right);
+    }
+    
+    bool dfs(TreeNode* root , int node_ind , int length)
+    {
+        if(root == NULL) return true;
+        
+        if(node_ind > length) return false;
+        
+        return dfs(root->left, 2*node_ind , length) && dfs(root->right , (2 * node_ind) + 1 , length);
+    }
+    bool isCompleteTree(TreeNode* root) {
+        
+        
+        int length = len(root);
+        // return bfs(root);
+        return dfs(root , 1 , length);
+        
+      
     }
 };
