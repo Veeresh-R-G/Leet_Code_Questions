@@ -17,14 +17,11 @@ public:
         while(i < nums.size())
         {
             
-            zeros = 0;
-            while(i < nums.size() && nums[i++] == 0)
-            {
-                zeros++;
-            }
+            if(nums[i] == 0) zeros++;
+            else zeros = 0;
             
-            ans += (zeros * (zeros + 1)) / 2;
-            
+            ans += zeros;
+            i++;
         }
         
         
