@@ -1,7 +1,9 @@
 class Solution {
 public:
     /*
+        concept is about 3D Dp
         
+        and saving the third parameter as [sum % k] 
     */
     int MOD = 1e9 + 7;
     
