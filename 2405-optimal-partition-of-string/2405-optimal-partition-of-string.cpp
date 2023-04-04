@@ -20,7 +20,25 @@ public:
         
         int N = s.size();
         
+        /*
         
+        
+            we require the >= if the starting char is not same as the endng char which
+            is repeating in between
+            
+            for example : 
+            aabbc
+            
+            a ab bc
+            
+            after the first partition a is formed
+            then ab and then when we come to b(from bc)
+            since starting char is a and repeated char is b which is repeated internally
+            
+            we require the greater than case
+            
+            Takes care of the two pointer solution that I was not handling!!
+        */
         for(int i = 0 ; i < N ; i++)
         {
             if(seen[s[i] - 'a'] >= substringStart)
