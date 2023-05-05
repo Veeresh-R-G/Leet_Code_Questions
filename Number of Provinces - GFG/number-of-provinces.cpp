@@ -8,59 +8,50 @@ using namespace std;
 
 class Solution {
   public:
+  void dfs(int node , vector<int> g[] , vector<bool>& vis)
+  {
+      vis[node] = true;
+      
+      for(auto it : g[node])
+      {
+          if(vis[it] == false)
+          {
+              dfs(it , g , vis);
+          }
+      }
+  }
   
-  
-  
-    void dfs(int node , vector<int> graph[] , vector<bool>& vis)
-    {
-        if(vis[node] == true) return;
-        
-        vis[node] = true;
-        
-        for(auto child : graph[node])
-        {
-            if(!vis[child])
-            {
-                dfs(child , graph , vis);
-            }
-        }
-    }
-    
     int numProvinces(vector<vector<int>> adj, int V) {
         // code here
+    
+        int ans = 0;
         
         vector<int> graph[V];
-        
-  
         
         for(int i = 0 ; i < V ; i++)
         {
             for(int j = 0 ; j < V ; j++)
             {
-                if(i != j && adj[i][j] == 1)
+                if(adj[i][j] == 1 && i != j)
                 {
                     graph[i].push_back(j);
-                    graph[j].push_back(i);
                 }
             }
         }
         
-        // cout << "HEre" << endl;
-        
         vector<bool> vis(V , false);
-        int ans = 0;
+        
         for(int i = 0 ; i < V ; i++)
         {
             if(vis[i] == false)
             {
                 ans++;
-                dfs(i , graph , vis);
+                dfs(i , graph, vis);
             }
         }
         
-        
-        
         return ans;
+        
     }
 };
 
