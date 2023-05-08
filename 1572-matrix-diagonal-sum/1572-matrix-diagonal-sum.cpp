@@ -13,7 +13,7 @@ public:
         for(int i = 0 ; i < N ; i++)
         {
             sum += (mat[i][i] + mat[N - 1 - i][i]);
-            cout << sum << " ";
+
         }
         
         sum = N % 2 ? sum - mat[mid][mid] : sum;
