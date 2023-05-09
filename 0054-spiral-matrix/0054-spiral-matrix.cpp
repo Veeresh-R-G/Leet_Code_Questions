@@ -5,55 +5,51 @@ public:
         int N = matrix.size();
         int M = matrix[0].size();
         
-        int left = 0;
-        int right = M - 1;
-        int top = 0;
-        int down = N - 1;
+        
+        int row = 0;
+        int col = 0;
+        int rowEnd = N - 1;
+        int colEnd = M - 1;
+        
+        int count = 0;
+        int total = N * M;
         
         vector<int> ans;
         
-        while(left <= right && top <= down)
+        while(count < total)
         {
-            
-            //Left to Right
-            for(int i = left ; i <= right ; i++)
+            //left to right
+            for(int i = col ; count<total && i <= colEnd ; i++)
             {
-                ans.push_back(matrix[top][i]);
+                ans.push_back(matrix[row][i]);
+                count++;
             }
-            top++;
-            
-    
-            //Top to down
-            for(int i = top ; i <= down ; i++)
+            row++;
+            //top to bottom
+            for(int i = row ; count<total && i <= rowEnd ; i++)
             {
-                ans.push_back(matrix[i][right]);
+                ans.push_back(matrix[i][colEnd]);
+                count++;
             }
-            right--;
+            colEnd--;
             
-            //Right to Left
-            if(top <= down)
+            //right to left
+            for(int i = colEnd ; count<total && i >= col ;i--)
             {
-                for(int i = right ; i >= left ; i--)
-                {
-                    ans.push_back(matrix[down][i]);
-                }
-                down--;
+                ans.push_back(matrix[rowEnd][i]);
+                count++;
             }
-            
-            
+            rowEnd--;
             //bottom to top
-            if(left <= right)
+            for(int i = rowEnd ; count<total && i >= row ; i--)
             {
-                for(int i = down ; i>= top ; i--)
-                {
-                    ans.push_back(matrix[i][left]);
-                }
-                left++;
+                ans.push_back(matrix[i][col]);
+                count++;
             }
-            
-            
+            col++;
         }
         
         return ans;
+        
     }
 };
