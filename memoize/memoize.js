@@ -4,9 +4,9 @@
 function memoize(fn) {
   const cache = new Map();
   return function() {
-    let key = arguments[0];
+    let key = arguments[0] * 13579;
     if (arguments[1]) {
-      key += arguments[1] * 100001;
+      key += arguments[1] * 97531;
     }
     const result = cache.get(key);
     if (result !== undefined) {
