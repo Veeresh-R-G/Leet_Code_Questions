@@ -10,13 +10,6 @@
  */
 class Solution {
 
-private:
-    int len(ListNode* head)
-    {
-        if(!head) return 0;
-
-        return 1 + len(head->next);
-    }
 public:
 
     ListNode* swapPairs(ListNode* head) {
@@ -25,9 +18,13 @@ public:
         {
             return head;
         }
-
-        int n = len(head);
-        ListNode* temp = head , *first = temp , *second = temp , *nexto = temp , *prev = temp;
+        
+        ListNode* temp = head;
+        ListNode* first = temp;
+        ListNode* second = temp;
+        ListNode* nexto = temp;
+        ListNode* prev = temp;
+        
         ListNode* ans = head->next; // second node
         while(temp && temp->next != NULL)
         {
