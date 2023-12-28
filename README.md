@@ -1,3 +1,2 @@
 # Leet_Code_Questions
-<br>
-Credits : [LeetHub](https://github.com/QasimWani/LeetHub)
+- [LeetSync](https://github.com/3ba2ii/LeetSync)
