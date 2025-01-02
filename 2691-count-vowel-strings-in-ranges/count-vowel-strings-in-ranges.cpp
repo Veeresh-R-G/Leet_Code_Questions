@@ -21,10 +21,10 @@ public:
         umap['u'] = 1;
 
         int n = words.size();
-        vector<int> ans;
-        vector<int> temp;
-        vector<int> prefix(n, 0);
         int sum = 0;
+        
+        vector<int> ans;
+        vector<int> prefix(n, 0);
         
         for(int i = 0; i < n; i++){
             if(helper(words[i])){
